@@ -1,9 +1,4 @@
-/*
- * filePro.cpp
- *
- *  Created on: Apr 12, 2014
- *      Author: red
- */
+
 #ifndef FILEPRO_CPP_
 #define FILEPRO_CPP_
 
@@ -50,11 +45,23 @@ void loadTest(vector<string> &testData, vector<int> &movieIndex, vector<int> &us
 
 	char data_char[SIZE_MOVIE];
 
-	while(fin.getline(data_char, sizeof(data_char),'\n'))
+	if(!data)
 	{
-		testData.push_back(data_char);
+		cout << "test data opening error" << endl;
 	}
 
+	while(fin.getline(data_char, sizeof(data_char),'\n'))
+	{
+		vector<string> temp;
+		temp.push_back(data_char);
+		temp = split(temp[0]);
+
+		testData.push_back(data_char);
+		userIndex.push_back(toInt(temp[0]));
+		movieIndex.push_back(toInt(temp[1]));
+	}
+
+	fin.close();
 }
 
 #endif FILEPRO_CPP_

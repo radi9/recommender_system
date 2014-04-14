@@ -1,10 +1,3 @@
-/*
- * filePreprocessing.cpp
- *
- *  Created on: Apr 11, 2014
- *      Author: red
- */
-
 #ifndef COMMON_CPP_
 #define COMMON_CPP_
 

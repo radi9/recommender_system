@@ -1,10 +1,7 @@
-/*
- * user.h
- *
- *  Created on: Apr 11, 2014
- *      Author: red
- */
+#ifndef USER_CPP_
+#define USER_CPP_
 
+#include "user.h"
 void User::setUserID(int userID)
 {
 	this -> userID = userID;
@@ -30,3 +27,4 @@ void User::addMovieRating(int movieRating)
 	ratingList.push_back(movieRating);
 }
 
+#endif USER_CPP_
