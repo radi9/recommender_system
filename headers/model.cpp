@@ -4,6 +4,8 @@
  *  Created on: Apr 11, 2014
  *      Author: red
  */
+#ifndef MODEL_CPP_
+#define MODEL_CPP_
 
 namespace model
 {
@@ -39,5 +41,5 @@ void model()
 
 };
 
-
+#endif
 

@@ -8,15 +8,17 @@
 #ifndef COMMONHEADER_H_
 #define COMMONHEADER_H_
 
-#include <string>
+using namespace std;
+
+#include <cstring>
 #include <vector>
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
 #include <fstream>
 #include <algorithm>
 #include <iomanip>
 #include <math.h>
-
+#include "user.h"
 
 
 #define SIZE_USER 943
@@ -30,29 +32,23 @@
 #define BEGIN_BLOCK {
 #define END_BLOCK }
 
-using namespace std;
+
 
 typedef vector<int> Index;
-typedef vector<string> Temp;
-typedef vector<User> UserMatrix;
-typedef vector<vector<int> > DataMatrix;
+typedef vector<string> Data;
+typedef vector<User> UserList;
 
-class User
+class myUserContainer
 {
 public:
-	int getUserID();
-	void setUserID(int userID);
-	vector<int> getMovieRating(int movieID);
-	void addMoiveFavore(int movieID);
-	void addMovieRating(int movieRating);
+	int size();
+	User searchUser(int userID);
+	bool push_back(User user);
 
 private:
-	int userID;
-	vector<int> movieSaw; //movie id in there
-	vector<int> ratingList; //moive rating score record
-	bool movieFind(int movieID);
+	UserList container;
+	int checkUser(int usesrID);
 };
-
 
 void loadTrain(vector<string> &data, vector<int> &movieIndex, vector<int> &userIndex, double &global_averageRating);
 void loadTest(vector<string> &data, vector<int> &movieIndex, vector<int> &userIndex);

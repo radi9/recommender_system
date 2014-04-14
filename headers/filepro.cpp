@@ -9,7 +9,7 @@
 
 void loadTrain(vector<string> &trainData, vector<int> &movieIndex, vector<int> &userIndex, double &global_averageRating)
 {
-	ifstrem fin;
+	ifstream fin;
 	fin.open(TRAIN_SET);
 
 	char data_char[SIZE_MOVIE];
@@ -21,7 +21,7 @@ void loadTrain(vector<string> &trainData, vector<int> &movieIndex, vector<int> &
 	{
 		cout << "training data opening failed" << endl;
 	}
-	while(fin.getline(data_char, sizeof(data_char),"\n"))
+	while(fin.getline(data_char, sizeof(data_char),'\n'))
 	{
 		vector<string> temp;
 		temp.push_back(data_char);
@@ -35,11 +35,11 @@ void loadTrain(vector<string> &trainData, vector<int> &movieIndex, vector<int> &
 
 	}
 	global_averageRating =  ROUND((static_cast<double>(global_totalRating) / static_cast<double>(count)));
-	data.close();
+	fin.close();
 
 	//sort by Id and emulate duplicate item
 	movieIndex = sortList(movieIndex);
-	userIndeex = sortList(userIndex);
+	userIndex = sortList(userIndex);
 
 }
 
@@ -50,7 +50,7 @@ void loadTest(vector<string> &testData, vector<int> &movieIndex, vector<int> &us
 
 	char data_char[SIZE_MOVIE];
 
-	while(fin.getline(data_char, sizeof(data_char),"\n"))
+	while(fin.getline(data_char, sizeof(data_char),'\n'))
 	{
 		testData.push_back(data_char);
 	}

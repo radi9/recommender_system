@@ -8,15 +8,15 @@
 #include "../headers/commonHeader.h"
 #include "../headers/common.cpp"
 #include "../headers/filepro.cpp"
-#include "../headers/user.h"
 #include "../headers/model.cpp"
+#include "../headers/user.cpp"
 
 int main()
 {
 	Index trainUser;
 	Index trainTest;
-	Temp data;
-	DataMatrix trainMatrix;
+	Data temp;
+	UserList trainMatrix;
 
 
 

@@ -1,37 +1,28 @@
 /*
  * user.h
  *
- *  Created on: Apr 11, 2014
+ *  Created on: Apr 14, 2014
  *      Author: red
  */
 
 #ifndef USER_H_
 #define USER_H_
 
-void User::setUserID(int userID)
+class User
 {
-	this -> userID = userID;
-}
+public:
+	int getUserID();
+	void setUserID(int userID);
+	int getMovieRating(int movieID);
+	void addMoiveFavore(int movieID);
+	void addMovieRating(int movieRating);
 
-int User::getUserID()
-{
-	return this -> userID;
-}
-
-vector<int> User::getMovieRating(int movieID)
-{
-	return ratingList[movieID];
-}
-
-void User::addMoiveFavore(int movieID)
-{
-	movieSaw.push_back((movieID));
-}
-
-void User::addMovieRating(int movieRating)
-{
-	ratingList.push_back(movieRating);
-}
+private:
+	int userID;
+	vector<int> movieSaw; //movie id in there
+	vector<int> ratingList; //moive rating score record
+	bool movieFind(int movieID);
+};
 
 
 #endif /* USER_H_ */
