@@ -8,25 +8,13 @@ int myUserContainer::size()
 
 User myUserContainer::searchUser(int userID)
 {
-	/*static_assert(container[userID] == NULL,"this user not exist");*/
-	//static_assert for C++ 11, linux not support
+	static_assert(container[userID] == NULL,"this user not exist");
 
-	if(container[userID] != NULL)
-	{
-		return container[userID];
-	}else
-	{
-		cout << "this user not exist" << endl;
-		return;
-	}
 }
 
-bool myUserContainer::insert_end(User user)
+void myUserContainer::insert_end(User user)
 {
-	if(container.push_back(user))
-	{
-		return true;
-	}
+	container.push_back(user);
 }
 
 int myUserContainer::checkUser(int userID)

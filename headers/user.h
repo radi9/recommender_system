@@ -8,12 +8,13 @@ public:
 	void setUserID(int userID);
 	int getMovieRating(int movieID);
 	void addMovieRating(int movieID, int movieRating);
+	int compare(const User&u);
 
 private:
 	int userID;
 	vector<int> movieSaw; //movie id in there
 	vector<int> ratingList; //moive rating score record
-	bool movieFind(int movieID);
+	int movieFind(int movieID);
 };
 
 #endif USER_H_

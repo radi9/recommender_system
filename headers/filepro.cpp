@@ -45,7 +45,7 @@ void loadTest(vector<string> &testData, vector<int> &movieIndex, vector<int> &us
 
 	char data_char[SIZE_MOVIE];
 
-	if(!data)
+	if(!fin)
 	{
 		cout << "test data opening error" << endl;
 	}

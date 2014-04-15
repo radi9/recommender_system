@@ -13,9 +13,11 @@
 
 using namespace std;
 
+//put this before user.h such as user class's memeber could use this function
+int mybinary_search(vector<int> &vec, unsigned start, unsigned end, const int &key);
+
 //my define .h
 #include "user.h"
-
 
 #define SIZE_USER 943
 #define SIZE_MOVIE 1682
@@ -28,26 +30,22 @@ using namespace std;
 #define BEGIN_BLOCK {
 #define END_BLOCK }
 
-
-
 typedef vector<int> Index;
 typedef vector<string> Data;
 typedef vector<User> UserList;
-
-typedef myUserContainer Container;
-typedef double bias;
 
 class myUserContainer
 {
 public:
 	int size();
 	User searchUser(int userID);
-	bool insert_end(User user);
+	void insert_end(User user);
 
 private:
 	UserList container;
 	int checkUser(int usesrID);
 };
+
 
 void loadTrain(vector<string> &data, vector<int> &movieIndex, vector<int> &userIndex, double &global_averageRating);
 void loadTest(vector<string> &data, vector<int> &movieIndex, vector<int> &userIndex);
@@ -55,13 +53,14 @@ void loadTest(vector<string> &data, vector<int> &movieIndex, vector<int> &userIn
 
 vector<string> split(const string &n);
 int toInt(const string s);
-int mybinary_search(vector<int> &vec, unsigned start, unsigned end, const int &key);
+
 vector<int> sortList(vector<int> list);
 double getMean(int totalRating, int ratingCount);
 
 
 double predictRating(int userTotalRating, int userRatingCount, double bi, double bu);
 double rmseProcess(vector<int> &ratingVector,double predictRating);
+
 
 
 #endif /* COMMONHEADER_H_ */

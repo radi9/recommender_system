@@ -24,4 +24,20 @@ void User::addMovieRating(int movieID, int movieRating)
 	movieSaw.push_back(movieID);
 }
 
+int User::movieFind(int movieID)
+{
+	return mybinaray_search(movieSaw, 0, movieSaw.size()-1, movieID);
+}
+
+int User::compare(const User&u)
+{
+	if(u.getUserID() > userID)
+	{
+		return 1;
+	}else
+	{
+		return 0;
+	}
+	}
+}
 #endif USER_CPP_
