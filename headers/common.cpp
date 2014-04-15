@@ -28,8 +28,8 @@ int toInt(const string s)
 {
 	return atoi(s.c_str());
 }
-
-int mybinary_search(vector<int> &vec, unsigned start, unsigned end, const int &key)
+template <class myType>
+int mybinary_search(vector<myType> &vec, unsigned start, unsigned end, const int &key)
 {
     // Termination condition: start index greater than end index
     if(start > end)

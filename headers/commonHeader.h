@@ -14,7 +14,8 @@
 using namespace std;
 
 //put this before user.h such as user class's memeber could use this function
-int mybinary_search(vector<int> &vec, unsigned start, unsigned end, const int &key);
+template<class myTyep>
+int mybinary_search(vector<myType> &vec, unsigned start, unsigned end, const int &key);
 
 //my define .h
 #include "user.h"

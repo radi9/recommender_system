@@ -38,6 +38,5 @@ int User::compare(const User&u)
 	{
 		return 0;
 	}
-	}
 }
 #endif USER_CPP_
