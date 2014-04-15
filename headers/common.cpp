@@ -93,12 +93,13 @@ double rmseProcess(vector<int> &ratingVector,double predictRating)
 {
 	double err;
     double rmse = 0.0;
+    int ratingVecLength = ratingVector.size();
 
-	for(int i = 0; i < ratingVector.size(); ++i) {
+	for(int i = 0; i < ratingVecLength; ++i) {
 		err = static_cast<double>(ratingVector[i]) - predictRating;
         rmse += err*err;
     }
-	rmse = sqrt(rmse / ratingVector.size());
+	rmse = sqrt(rmse / ratingVecLength);
     return rmse;
 }
 

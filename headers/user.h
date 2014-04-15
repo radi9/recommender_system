@@ -1,51 +1,19 @@
-#include <string>
-#include <vector>
-
-using namespace std;
+#ifndef USER_H_
+#define USER_H_
 
 class User
 {
 public:
 	int getUserID();
 	void setUserID(int userID);
-	vector<int> getMoviePre();
-	vector<int> getMovieRating();
-	void addMovieRating(int movieRating);
+	int getMovieRating(int movieID);
+	void addMovieRating(int movieID, int movieRating);
 
 private:
 	int userID;
 	vector<int> movieSaw; //movie id in there
-//	vector<int> moviePre;//boolean in there    NOT Necessary one
-	vector<int> movieRating; //moive rating score record
+	vector<int> ratingList; //moive rating score record
 	bool movieFind(int movieID);
 };
 
-void User::setUserID(int userID)
-{
-	this -> userID = userID;
-}
-
-int User::getUserID()
-{
-	return this -> userID;
-}
-
-vector<int> User::getMovieRating()
-{
-	return this -> movieRating;
-}
-
-//void User::addMoviePre(int movieID)
-//{
-//}
-//
-//void User::addMovieRating(int movieRating)
-//{
-//	this - > movieRating.push_bach(movieRating);
-//	sort(this -> movieRating);
-//}
-//
-//int User::movieFind(int movieID)
-//{
-//	return myBinary_search();
-//}
+#endif USER_H_

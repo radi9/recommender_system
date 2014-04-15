@@ -8,7 +8,8 @@ int myUserContainer::size()
 
 User myUserContainer::searchUser(int userID)
 {
-	static_assert(container[userID] == NULL,"this user not exist");
+	/*static_assert(container[userID] == NULL,"this user not exist");*/
+	//static_assert for C++ 11, linux not support
 
 	if(container[userID] != NULL)
 	{
@@ -16,6 +17,7 @@ User myUserContainer::searchUser(int userID)
 	}else
 	{
 		cout << "this user not exist" << endl;
+		return;
 	}
 }
 
@@ -29,7 +31,8 @@ bool myUserContainer::insert_end(User user)
 
 int myUserContainer::checkUser(int userID)
 {
-	static_assert(container[userID] == NULL,"this user not exist in the users list");
+	/*static_assert(container[userID] == NULL,"this user not exist in the users list");*/
+
 	return mybinary_search(container, 0, container.size()-1, userID);
 }
 	

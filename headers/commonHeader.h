@@ -34,6 +34,9 @@ typedef vector<int> Index;
 typedef vector<string> Data;
 typedef vector<User> UserList;
 
+typedef myUserContainer Container;
+typedef double bias;
+
 class myUserContainer
 {
 public:
