@@ -4,8 +4,8 @@
 class User
 {
 public:
-	int getUserID();
-	void setUserID(int userID);
+	int getUserID() const;
+	void setUserID(int userID) const;
 	int getMovieRating(int movieID);
 	void addMovieRating(int movieID, int movieRating);
 	int compare(const User&u);

@@ -3,15 +3,6 @@
 
 #include "user.h"
 
-void User::setUserID(int userID)
-{
-	this -> userID = userID;
-}
-
-int User::getUserID()
-{
-	return this -> userID;
-}
 
 int User::getMovieRating(int movieID)
 {
@@ -26,17 +17,14 @@ void User::addMovieRating(int movieID, int movieRating)
 
 int User::movieFind(int movieID)
 {
-	return mybinaray_search(movieSaw, 0, movieSaw.size()-1, movieID);
+	return mybinary_search(movieSaw, 0, movieSaw.size()-1, movieID);
 }
 
-int User::compare(const User&u)
+int User::compare(const User &u)
 {
-	if(u.getUserID() > userID)
+	if(u.getUserID() == userID)
 	{
-		return 1;
-	}else
-	{
-		return 0;
+
 	}
 }
 #endif USER_CPP_
