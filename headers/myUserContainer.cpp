@@ -26,4 +26,4 @@ int myUserContainer::checkUser(int userID)
 	
 
 
-#endif MYUSERCONTAINER_CPP_
+#endif

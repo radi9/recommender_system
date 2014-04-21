@@ -5,10 +5,14 @@ class User
 {
 public:
 	int getUserID() const;
-	void setUserID(int userID) const;
-	int getMovieRating(int movieID);
+	void setUserID(int userID);
+	int getMovieRating(int movieID) const;
+	vector<int> getMovieRecords() const;
 	void addMovieRating(int movieID, int movieRating);
-	int compare(const User&u);
+
+	bool operator > (const User &a) const;
+	bool operator < (const User &a) const;
+	void operator == (const User &a);
 
 private:
 	int userID;
@@ -17,4 +21,4 @@ private:
 	int movieFind(int movieID);
 };
 
-#endif USER_H_
+#endif

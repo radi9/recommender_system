@@ -64,7 +64,7 @@ void loadTest(vector<string> &testData, vector<int> &movieIndex, vector<int> &us
 	fin.close();
 }
 
-#endif FILEPRO_CPP_
+#endif
 
 
 

@@ -3,7 +3,8 @@
 #include "../headers/filepro.cpp"
 #include "../headers/model.cpp"
 #include "../headers/user.cpp"
-#include "myUserContainer.cpp"
+#include "../headers/myUserContainer.cpp"
+
 int main()
 {
 	Index trainUser;
