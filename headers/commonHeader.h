@@ -35,16 +35,16 @@ typedef vector<int> Index;
 typedef vector<string> Data;
 typedef vector<User> UserList;
 
-class myUserContainer
-{
-public:
-	int size();
-	User searchUser(int userID);
-	void insert_end(User user);
+struct User{
 
-private:
-	UserList container;
-	int checkUser(int usesrID);
+	int id;
+	int movieID;
+	int rating;
+	int time;
+	bool operator()(const User &a)
+	{
+		return (this -> movieID > a.id) ? 1 : 0;
+	}
 };
 
 
