@@ -17,9 +17,6 @@ using namespace std;
 template<class myType>
 int mybinary_search(vector<myType> &vec, unsigned start, unsigned end, const int &key);
 
-//my define .h
-#include "user.h"
-
 #define SIZE_USER 943
 #define SIZE_MOVIE 1682
 #define TRAIN_SET "/home/red/ML_DM data/ml-10M/train.txt"
@@ -47,8 +44,7 @@ struct User{
 	}
 };
 
-
-void loadTrain(vector<string> &data, vector<int> &movieIndex, vector<int> &userIndex, double &global_averageRating);
+void loadTrain(UserList &trainMatrix, Index &movieIndex, Index &userIndex, double &global_averageRating);
 void loadTest(vector<string> &data, vector<int> &movieIndex, vector<int> &userIndex);
 
 

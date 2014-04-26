@@ -1,7 +1,7 @@
-#include "../headers/commonHeader.h"
-#include "../headers/common.cpp"
-#include "../headers/filepro.cpp"
-#include "../headers/model.cpp"
+#include "commonHeader.h"
+#include "common.cpp"
+#include "filepro.cpp"
+#include "model.cpp"
 
 int main()
 {
@@ -19,7 +19,7 @@ int main()
 	int movieTotalRating[SIZE_MOVIE] = {0}; //particular movie total rating
 	int movieRatingCount[SIZE_MOVIE] = {0}; //how many the movie
 
-
+	double global_averageRating = 0.0;
 
 	for(vector<string>::iterator it = train.begin(); it != train.end(); it++)
 	{
@@ -31,17 +31,17 @@ int main()
 		user.time = toInt(temp[3]);
 
 		//sotre and add each encounter the movie's rating
-		userTotalRating[user_index] += toInt(temp[2]);
-		userRatingCount[user_index] += 1;
-		movieTotalRating[movie_index] += toInt(temp[2]);
-		movieRatingCount[movie_index] += 1;
+		userTotalRating[user.id] += toInt(temp[2]);
+		userRatingCount[user.id] += 1;
+		movieTotalRating[user.movieID] += toInt(temp[2]);
+		movieRatingCount[user.movieID] += 1;
 	}
 
 
 	//initial moive(bi) and user(bu) bias
 	
-	double bu[SIZE_USER] = {0};
-	double bi[SIZE_MOVIE] = {0};
+	double bu[SIZE_USER] = {0.0};
+	double bi[SIZE_MOVIE] = {0.0};
 
 
 

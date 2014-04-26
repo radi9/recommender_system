@@ -2,8 +2,7 @@
 #ifndef FILEPRO_CPP_
 #define FILEPRO_CPP_
 
-void loadTrain(vector<string> &trainData, vector<User> &userList,
-		vector<int> &userIndex, vector<int> &movieIndex,double &global_averageRating)
+void loadTrain(UserList &trainMatrix, Index &userIndex, Index &movieIndex, double &global_averageRating)
 {
 	ifstream fin;
 	fin.open(TRAIN_SET);
