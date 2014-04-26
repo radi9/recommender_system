@@ -2,14 +2,13 @@
 #include "../headers/common.cpp"
 #include "../headers/filepro.cpp"
 #include "../headers/model.cpp"
-#include "../headers/user.cpp"
-#include "../headers/myUserContainer.cpp"
 
 int main()
 {
 	Index trainUser;
 	Index trainTest;
 	Data temp;
+	Data train;
 	UserList trainMatrix;
 
 	//end preprcessing
@@ -20,7 +19,9 @@ int main()
 	int movieTotalRating[SIZE_MOVIE] = {0}; //particular movie total rating
 	int movieRatingCount[SIZE_MOVIE] = {0}; //how many the movie
 
-	for(vector<string>::iterator it = trainData.begin(); it != trainData.end(); it++)
+
+
+	for(vector<string>::iterator it = train.begin(); it != train.end(); it++)
 	{
 		vector<string> temp = split(*it);
 		User user;

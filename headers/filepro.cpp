@@ -2,7 +2,8 @@
 #ifndef FILEPRO_CPP_
 #define FILEPRO_CPP_
 
-void loadTrain(vector<string> &trainData, vector<int> &movieIndex, vector<int> &userIndex, double &global_averageRating)
+void loadTrain(vector<string> &trainData, vector<User> &userList,
+		vector<int> &userIndex, vector<int> &movieIndex,double &global_averageRating)
 {
 	ifstream fin;
 	fin.open(TRAIN_SET);
@@ -21,6 +22,15 @@ void loadTrain(vector<string> &trainData, vector<int> &movieIndex, vector<int> &
 		vector<string> temp;
 		temp.push_back(data_char);
 		temp = split(temp[0]);
+
+		User user;
+		user.id = toInt(temp[0]);
+		user.movieID = toInt(temp[1]);
+		user.rating = toInt(temp[2]);
+		user.time = toInt(temp[3]);
+
+		userList.push_back(user);
+
 		trainData.push_back(data_char);
 
 		userIndex.push_back(toInt(temp[0]));
