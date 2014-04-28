@@ -1,7 +1,7 @@
-#include "commonHeader.h"
-#include "common.cpp"
-#include "filepro.cpp"
-#include "model.cpp"
+#include "../headers/commonHeader.h"
+#include "../headers/common.cpp"
+#include "../headers/filepro.cpp"
+#include "../headers/model.cpp"
 
 int main()
 {

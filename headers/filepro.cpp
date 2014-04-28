@@ -28,9 +28,7 @@ void loadTrain(UserList &trainMatrix, Index &userIndex, Index &movieIndex, doubl
 		user.rating = toInt(temp[2]);
 		user.time = toInt(temp[3]);
 
-		userList.push_back(user);
-
-		trainData.push_back(data_char);
+		trainMatrix.push_back(user);
 
 		userIndex.push_back(toInt(temp[0]));
 		movieIndex.push_back(toInt(temp[1]));

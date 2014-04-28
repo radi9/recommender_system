@@ -28,10 +28,6 @@ int mybinary_search(vector<myType> &vec, unsigned start, unsigned end, const int
 #define BEGIN_BLOCK {
 #define END_BLOCK }
 
-typedef vector<int> Index;
-typedef vector<string> Data;
-typedef vector<User> UserList;
-
 struct User{
 
 	int id;
@@ -43,6 +39,12 @@ struct User{
 		return (this -> movieID > a.id) ? 1 : 0;
 	}
 };
+
+typedef vector<int> Index;
+typedef vector<string> Data;
+typedef vector<User> UserList;
+
+
 
 void loadTrain(UserList &trainMatrix, Index &movieIndex, Index &userIndex, double &global_averageRating);
 void loadTest(vector<string> &data, vector<int> &movieIndex, vector<int> &userIndex);
@@ -57,6 +59,8 @@ double getMean(int totalRating, int ratingCount);
 
 double predictRating(int userTotalRating, int userRatingCount, double bi, double bu);
 double rmseProcess(vector<int> &ratingVector,double predictRating);
+void model(const double &global_averageRating, const int &userTotalRating[], const int &userRatingCount[],
+		const int &movieTotalRating[], const int movieRatingCount[]);
 
 
 

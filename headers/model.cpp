@@ -2,9 +2,7 @@
 #ifndef MODEL_CPP_
 #define MODEL_CPP_
 
-
-
-void model(const double &global_averageRating,const int &userTotalRating[],
+void model(const double &global_averageRating, const int &userTotalRating[],
 		const int &userRatingCount[], const int &movieTotalRating[], const int movieRatingCount[])
 {
 	double bu[SIZE_USER] = {0};
@@ -85,7 +83,6 @@ void model(const double &global_averageRating,const int &userTotalRating[],
 	}
 }
 
-};
 
 #endif
 
