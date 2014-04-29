@@ -1,7 +1,7 @@
-#include "../headers/commonHeader.h"
-#include "../headers/common.cpp"
-#include "../headers/filepro.cpp"
-#include "../headers/model.cpp"
+#include "commonHeader.h"
+#include "common.cpp"
+#include "filepro.cpp"
+#include "model.cpp"
 
 int main()
 {
@@ -22,6 +22,7 @@ int main()
 	double global_averageRating = 0.0;
 
 	void loadTrain(UserList &trainMatrix, Index &userIndex, Index &movieIndex, double &global_averageRating);
+	void loadTest(UserList &testMatrix, Index &movieIndex, Index &userIndex);
 
 	for(vector<string>::iterator it = train.begin(); it != train.end(); it++)
 	{

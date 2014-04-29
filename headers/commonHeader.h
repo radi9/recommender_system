@@ -47,7 +47,7 @@ typedef vector<User> UserList;
 
 
 void loadTrain(UserList &trainMatrix, Index &movieIndex, Index &userIndex, double &global_averageRating);
-void loadTest(vector<string> &data, vector<int> &movieIndex, vector<int> &userIndex);
+void loadTest(UserList &testMatrix, Index &movieIndex, Index &userIndex);
 
 
 vector<string> split(const string &n);
