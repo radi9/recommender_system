@@ -12,8 +12,8 @@ int main()
 	Data temp;
 	Data train;
 	Data test;
-	UserList trainMatrix;
-	UserList testMatrix;
+	UserTable trainMatrix;
+	UserTable testMatrix;
 
 	//end pre-processing
 	//create model
@@ -24,8 +24,11 @@ int main()
 	int movieRatingCount[SIZE_MOVIE] = {0}; //how many the movie
 
 	double global_averageRating = 0.0;
+	double global_totalRating = 0.0;
+	int ratingCount = 0;
 
-	void loadTrain(UserList &trainMatrix, Index &userIndex, Index &movieIndex, double &global_averageRating);
+	void loadTrain(UserTable &trainMatrix, Index &userIndex,
+			Index &movieIndex, double &global_totalRating, int &ratingCount);
 	loadTest(testMatrix, testUser, testMovie);
 
 	for(vector<string>::iterator it = train.begin(); it != train.end(); it++)
@@ -96,7 +99,7 @@ int main()
 			for(int j = 0; j <userRatingCount[i]; j++)
 			{
 				int movieID = trainUser[j]; //this movieID
-				int rating = dataMatrix[i][j]; //this user rate this movie, the rating
+				int rating = trainMatrix[i][j].rating; //this user rate this movie, the rating
 				double bui = global_totalRating - bu[i] - bi[j];
 				pui = predictRating(userTotalRating[i], userRatingCount[i],bi[j],bu[i]);
 				result << userIndex[i] << "::" << movieIndex[j] << "::" << dataMatrix[i][j] << "::" << timeMatrix[i][j] << "::"<< pui << endl;
@@ -117,7 +120,7 @@ int main()
 		}
 		for(int i = 0; i < 460; i++)
 		{
-		rmseProcess(testMatrix[i],predictRating(userTotalRating[i],userRatingCount[i],bi[i],bu[i]));
+		rmseProcess(,predictRating(userTotalRating[i],userRatingCount[i],bi[i],bu[i]));
 		}
 	}
 	for(int i = 0; i < 460; i++)

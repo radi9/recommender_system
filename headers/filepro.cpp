@@ -2,15 +2,12 @@
 #ifndef FILEPRO_CPP_
 #define FILEPRO_CPP_
 
-void loadTrain(UserList &trainMatrix, Index &userIndex, Index &movieIndex, double &global_averageRating)
+void loadTrain(UserList &trainMatrix, Index &userIndex, Index &movieIndex, double &global_totalRating, int &ratingCount)
 {
 	ifstream fin;
 	fin.open(TRAIN_SET);
 
 	char data_char[SIZE_MOVIE];
-
-	int count = 0;
-	int global_totalRating = 0;
 
 	if(!fin)
 	{
@@ -32,11 +29,11 @@ void loadTrain(UserList &trainMatrix, Index &userIndex, Index &movieIndex, doubl
 
 		userIndex.push_back(toInt(temp[0]));
 		movieIndex.push_back(toInt(temp[1]));
-		count += 1;
+		totalCount += 1;
 		global_totalRating += toInt(temp[2]);
 
 	}
-	global_averageRating =  ROUND((static_cast<double>(global_totalRating) / static_cast<double>(count)));
+	global_averageRating =  ROUND((static_cast<double>(global_totalRating) / static_cast<double>(totalCount)));
 	fin.close();
 
 	//sort by Id and emulate duplicate item

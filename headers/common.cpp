@@ -93,12 +93,15 @@ double rmseProcess(UserList userMatrix,double predictRating)
 {
 	double err;
     double rmse = 0.0;
-    int listLen = userMatrix.size();
 
-	for(int i = 0; i < listLen; ++i) {
-		err = static_cast<double>(ratingVector[i]) - predictRating;
-        rmse += err*err;
-    }
+	for(auto it = userMatrix[i].begin(); it != userMatrix[i].end(); it++)
+	{
+		//iterator user i
+		for(int i = 0; i < listLen; ++i) {
+			err = static_cast<double>(ratingVector[i]) - predictRating;
+			rmse += err*err;
+		}
+	}
 	rmse = sqrt(rmse / ratingVecLength);
     return rmse;
 }

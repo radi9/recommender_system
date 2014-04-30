@@ -43,11 +43,13 @@ struct User{
 typedef vector<int> Index;
 typedef vector<string> Data;
 typedef vector<User> UserList;
+typedef vector<vector<User> > UserTable;
+
 
 
 
 void loadTrain(UserList &trainMatrix, Index &movieIndex, Index &userIndex, double &global_averageRating);
-void loadTest(UserList &testMatrix, Index &movieIndex, Index &userIndex);
+void loadTest(UserTable &testMatrix, Index &movieIndex, Index &userIndex);
 
 
 vector<string> split(const string &n);
