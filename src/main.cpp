@@ -7,12 +7,15 @@ int main()
 {
 	Index trainUser;
 	Index trainMovie;
-	Index testUser;
-	Index testMovie;
-	Data temp;
+	UserList trainList; //user list in training data,same user id in same list
+	UserTable trainMatrix;//each row contents a user list, it's a table(matrix)
+
 	Data train;
 	Data test;
-	UserTable trainMatrix;
+
+	Index testUser;
+	Index testMovie;
+	UserList testList;
 	UserTable testMatrix;
 
 	//end pre-processing
@@ -24,28 +27,15 @@ int main()
 	int movieRatingCount[SIZE_MOVIE] = {0}; //how many the movie
 
 	double global_averageRating = 0.0;
-	double global_totalRating = 0.0;
-	int ratingCount = 0;
+	int global_totalRating = 0.0;
+	int total_ratingCount = 0;
 
-	void loadTrain(UserTable &trainMatrix, Index &userIndex,
-			Index &movieIndex, double &global_totalRating, int &ratingCount);
+	loadTrain(trainMatrix, global_totalRating, total_ratingCount, userTotalRating, userRatingCount
+			, movieTotalRating, movieRatingCount);
 	loadTest(testMatrix, testUser, testMovie);
 
-	for(vector<string>::iterator it = train.begin(); it != train.end(); it++)
-	{
-		vector<string> temp = split(*it);
-		User user;
-		user.id = toInt(temp[0]);
-		user.movieID = toInt(temp[1]);
-		user.rating = toInt(temp[2]);
-		user.time = toInt(temp[3]);
-
-		//sotre and add each encounter the movie's rating
-		userTotalRating[user.id] += toInt(temp[2]);
-		userRatingCount[user.id] += 1;
-		movieTotalRating[user.movieID] += toInt(temp[2]);
-		movieRatingCount[user.movieID] += 1;
-	}
+	global_averageRating =  ROUND((static_cast<double>(global_totalRating)
+			/ static_cast<double>(total_ratingCount)));
 
 
 	//initial moive(bi) and user(bu) bias
@@ -82,7 +72,7 @@ int main()
 
 	for(int i = 0; i < 460; i++)
 	{
-		rmseProcess(testMatrix, predictRating(userTotalRating[i], userRatingCount[i],bi[i],bu[i]));
+		rmseProcess(testList, predictRating(userTotalRating[i], userRatingCount[i],bi[i],bu[i]));
 	}
 
 	for(int step = 0; step < 50; ++step)
@@ -102,7 +92,9 @@ int main()
 				int rating = trainMatrix[i][j].rating; //this user rate this movie, the rating
 				double bui = global_totalRating - bu[i] - bi[j];
 				pui = predictRating(userTotalRating[i], userRatingCount[i],bi[j],bu[i]);
-				result << userIndex[i] << "::" << movieIndex[j] << "::" << dataMatrix[i][j] << "::" << timeMatrix[i][j] << "::"<< pui << endl;
+				//original column
+				/*result << userIndex[i] << "::" << movieIndex[j] << "::" << dataMatrix[i][j] << "::" << timeMatrix[i][j] << "::"<< pui << endl;*/
+
 				double eui = rating - pui; //error about current rating and predicet rating
 				rmse += eui * eui;
 				bu[i] += learnRate * (eui - lambda * bu[j]);
@@ -120,7 +112,7 @@ int main()
 		}
 		for(int i = 0; i < 460; i++)
 		{
-		rmseProcess(,predictRating(userTotalRating[i],userRatingCount[i],bi[i],bu[i]));
+		rmseProcess(testList,predictRating(userTotalRating[i],userRatingCount[i],bi[i],bu[i]));
 		}
 	}
 	for(int i = 0; i < 460; i++)

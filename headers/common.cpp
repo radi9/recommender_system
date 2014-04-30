@@ -89,20 +89,24 @@ double predictRating(int userTotalRating, int userRatingCount, double bi, double
 	return predict_rate;
 }
 
-double rmseProcess(UserList userMatrix,double predictRating)
+double rmseProcess(UserList userList,double predictRating)
 {
+	//lack item element
 	double err;
     double rmse = 0.0;
+    int listLen = userList.max_size();
 
-	for(auto it = userMatrix[i].begin(); it != userMatrix[i].end(); it++)
-	{
-		//iterator user i
-		for(int i = 0; i < listLen; ++i) {
-			err = static_cast<double>(ratingVector[i]) - predictRating;
-			rmse += err*err;
-		}
-	}
-	rmse = sqrt(rmse / ratingVecLength);
+    for (int i = 0; i < listLen; i++)
+    {
+    	for(vector<User>::iterator it = userList.begin(); it != userList.end(); it++)
+    	{
+
+    		err = static_cast<double>((*it).rating) - predictRating;
+    		rmse += err*err;
+    	}
+    }
+
+	rmse = sqrt(rmse / listLen);
     return rmse;
 }
 

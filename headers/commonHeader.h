@@ -43,12 +43,13 @@ struct User{
 typedef vector<int> Index;
 typedef vector<string> Data;
 typedef vector<User> UserList;
-typedef vector<vector<User> > UserTable;
+typedef vector<UserList> UserTable;
 
 
 
 
-void loadTrain(UserList &trainMatrix, Index &movieIndex, Index &userIndex, double &global_averageRating);
+void loadTrain(UserTable &trainMatrix,int &global_totalRating, int &total_ratingCount,
+		int *userTotalRating, int *userRatingCount, int *movieTotalRating, int *movieRatingCount);
 void loadTest(UserTable &testMatrix, Index &movieIndex, Index &userIndex);
 
 
@@ -60,7 +61,7 @@ double getMean(int totalRating, int ratingCount);
 
 
 double predictRating(int userTotalRating, int userRatingCount, double bi, double bu);
-double rmseProcess(UserList userMatrix,double predictRating);
+double rmseProcess(UserList userList,double predictRating);
 
 
 

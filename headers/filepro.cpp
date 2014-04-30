@@ -2,7 +2,8 @@
 #ifndef FILEPRO_CPP_
 #define FILEPRO_CPP_
 
-void loadTrain(UserList &trainMatrix, Index &userIndex, Index &movieIndex, double &global_totalRating, int &ratingCount)
+void loadTrain(UserTable &trainMatrix,int &global_totalRating, int &total_ratingCount,
+		int *userTotalRating, int *userRatingCount, int *movieTotalRating, int *movieRatingCount)
 {
 	ifstream fin;
 	fin.open(TRAIN_SET);
@@ -25,20 +26,27 @@ void loadTrain(UserList &trainMatrix, Index &userIndex, Index &movieIndex, doubl
 		user.rating = toInt(temp[2]);
 		user.time = toInt(temp[3]);
 
-		trainMatrix.push_back(user);
+		trainMatrix[user.id].push_back(user);
 
-		userIndex.push_back(toInt(temp[0]));
-		movieIndex.push_back(toInt(temp[1]));
-		totalCount += 1;
+
+		//sotre and add each encounter the movie's rating
+		userTotalRating[user.id] += toInt(temp[2]);
+		userRatingCount[user.id] += 1;
+		movieTotalRating[user.movieID] += toInt(temp[2]);
+		movieRatingCount[user.movieID] += 1;
+
+//		userIndex.push_back(toInt(temp[0]));
+//		movieIndex.push_back(toInt(temp[1]));
+		total_ratingCount += 1;
 		global_totalRating += toInt(temp[2]);
 
 	}
-	global_averageRating =  ROUND((static_cast<double>(global_totalRating) / static_cast<double>(totalCount)));
+
 	fin.close();
 
 	//sort by Id and emulate duplicate item
-	movieIndex = sortList(movieIndex);
-	userIndex = sortList(userIndex);
+//	movieIndex = sortList(movieIndex);
+//	userIndex = sortList(userIndex);
 
 }
 
