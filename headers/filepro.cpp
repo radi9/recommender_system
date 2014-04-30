@@ -45,7 +45,7 @@ void loadTrain(UserList &trainMatrix, Index &userIndex, Index &movieIndex, doubl
 
 }
 
-void loadTest(vector<string> &testData, vector<int> &movieIndex, vector<int> &userIndex)
+void loadTest(UserList &testMatrix, Index &movieIndex, Index &userIndex)
 {
 	ifstream fin;
 	fin.open(TEST_SET);
@@ -63,7 +63,14 @@ void loadTest(vector<string> &testData, vector<int> &movieIndex, vector<int> &us
 		temp.push_back(data_char);
 		temp = split(temp[0]);
 
-		testData.push_back(data_char);
+		User user;
+		user.id = toInt(temp[0]);
+		user.movieID = toInt(temp[1]);
+		user.rating = toInt(temp[2]);
+		user.time = toInt(temp[3]);
+
+		testMatrix.push_back(user);
+
 		userIndex.push_back(toInt(temp[0]));
 		movieIndex.push_back(toInt(temp[1]));
 	}

@@ -89,13 +89,13 @@ double predictRating(int userTotalRating, int userRatingCount, double bi, double
 	return predict_rate;
 }
 
-double rmseProcess(vector<int> &ratingVector,double predictRating)
+double rmseProcess(UserList userMatrix,double predictRating)
 {
 	double err;
     double rmse = 0.0;
-    int ratingVecLength = ratingVector.size();
+    int listLen = userMatrix.size();
 
-	for(int i = 0; i < ratingVecLength; ++i) {
+	for(int i = 0; i < listLen; ++i) {
 		err = static_cast<double>(ratingVector[i]) - predictRating;
         rmse += err*err;
     }

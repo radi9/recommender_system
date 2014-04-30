@@ -47,7 +47,7 @@ typedef vector<User> UserList;
 
 
 void loadTrain(UserList &trainMatrix, Index &movieIndex, Index &userIndex, double &global_averageRating);
-void loadTest(vector<string> &data, vector<int> &movieIndex, vector<int> &userIndex);
+void loadTest(UserList &testMatrix, Index &movieIndex, Index &userIndex);
 
 
 vector<string> split(const string &n);
@@ -58,9 +58,7 @@ double getMean(int totalRating, int ratingCount);
 
 
 double predictRating(int userTotalRating, int userRatingCount, double bi, double bu);
-double rmseProcess(vector<int> &ratingVector,double predictRating);
-void model(const double &global_averageRating, const int &userTotalRating[], const int &userRatingCount[],
-		const int &movieTotalRating[], const int movieRatingCount[]);
+double rmseProcess(UserList userMatrix,double predictRating);
 
 
 
