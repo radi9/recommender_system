@@ -19,9 +19,9 @@ int mybinary_search(vector<myType> &vec, unsigned start, unsigned end, const int
 
 #define SIZE_USER 943
 #define SIZE_MOVIE 1682
-#define TRAIN_SET "/home/red/ML_DM data/ml-10M/train.txt"
-#define TEST_SET "/home/red/ML_DM data/ml-10M/testt.txt"
-#define OUTPUT_FILE "/home/red/ML_DM data/ml-10M"
+#define TRAIN_SET "/home/red/ML_DM data/new ml-10M/train.txt"
+#define TEST_SET "/home/red/ML_DM data/new ml-10M/testt.txt"
+#define OUTPUT_FILE "/home/red/ML_DM data/new ml-10M"
 #define ROUND(x) ((int)(x * 100 + 0.5)/100.) //round off to the 2nd decimal place
 #define SIZE_USER 943
 #define SIZE_MOVIE 1682
@@ -50,7 +50,7 @@ typedef vector<UserList> UserTable;
 
 void loadTrain(UserTable &trainMatrix,int &global_totalRating, int &total_ratingCount,
 		int *userTotalRating, int *userRatingCount, int *movieTotalRating, int *movieRatingCount);
-void loadTest(UserTable &testMatrix, Index &movieIndex, Index &userIndex);
+void loadTest(UserList &testList);
 
 
 vector<string> split(const string &n);
@@ -61,7 +61,7 @@ double getMean(int totalRating, int ratingCount);
 
 
 double predictRating(int userTotalRating, int userRatingCount, double bi, double bu);
-double rmseProcess(UserList userList,double predictRating);
+double rmseProcess(UserList &userList,double predictRating);
 
 
 

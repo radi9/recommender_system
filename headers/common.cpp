@@ -89,7 +89,7 @@ double predictRating(int userTotalRating, int userRatingCount, double bi, double
 	return predict_rate;
 }
 
-double rmseProcess(UserList userList,double predictRating)
+double rmseProcess(UserList &userList,double predictRating)
 {
 	//lack item element
 	double err;

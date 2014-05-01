@@ -50,7 +50,7 @@ void loadTrain(UserTable &trainMatrix,int &global_totalRating, int &total_rating
 
 }
 
-void loadTest(UserList &testMatrix, Index &movieIndex, Index &userIndex)
+void loadTest(UserList &testList)
 {
 	ifstream fin;
 	fin.open(TEST_SET);
@@ -74,10 +74,8 @@ void loadTest(UserList &testMatrix, Index &movieIndex, Index &userIndex)
 		user.rating = toInt(temp[2]);
 		user.time = toInt(temp[3]);
 
-		testMatrix.push_back(user);
+		testList.push_back(user);
 
-		userIndex.push_back(toInt(temp[0]));
-		movieIndex.push_back(toInt(temp[1]));
 	}
 
 	fin.close();

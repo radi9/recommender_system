@@ -32,7 +32,7 @@ int main()
 
 	loadTrain(trainMatrix, global_totalRating, total_ratingCount, userTotalRating, userRatingCount
 			, movieTotalRating, movieRatingCount);
-	loadTest(testMatrix, testUser, testMovie);
+	loadTest(testList);
 
 	global_averageRating =  ROUND((static_cast<double>(global_totalRating)
 			/ static_cast<double>(total_ratingCount)));
@@ -117,7 +117,7 @@ int main()
 	}
 	for(int i = 0; i < 460; i++)
 	{
-		rmseProcess(testMatrix[i],predictRating(userTotalRating[i],userRatingCount[i],bi[i],bu[i]));
+		rmseProcess(testList,predictRating(userTotalRating[i],userRatingCount[i],bi[i],bu[i]));
 	}
 
 
