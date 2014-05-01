@@ -2,15 +2,13 @@
 #ifndef FILEPRO_CPP_
 #define FILEPRO_CPP_
 
-void loadTrain(UserList &trainMatrix, Index &userIndex, Index &movieIndex, double &global_averageRating)
+void loadTrain(UserTable &trainMatrix,int &global_totalRating, int &total_ratingCount,
+		int *userTotalRating, int *userRatingCount, int *movieTotalRating, int *movieRatingCount)
 {
 	ifstream fin;
 	fin.open(TRAIN_SET);
 
 	char data_char[SIZE_MOVIE];
-
-	int count = 0;
-	int global_totalRating = 0;
 
 	if(!fin)
 	{
@@ -28,24 +26,31 @@ void loadTrain(UserList &trainMatrix, Index &userIndex, Index &movieIndex, doubl
 		user.rating = toInt(temp[2]);
 		user.time = toInt(temp[3]);
 
-		trainMatrix.push_back(user);
+		trainMatrix[user.id].push_back(user);
 
-		userIndex.push_back(toInt(temp[0]));
-		movieIndex.push_back(toInt(temp[1]));
-		count += 1;
+
+		//sotre and add each encounter the movie's rating
+		userTotalRating[user.id] += toInt(temp[2]);
+		userRatingCount[user.id] += 1;
+		movieTotalRating[user.movieID] += toInt(temp[2]);
+		movieRatingCount[user.movieID] += 1;
+
+//		userIndex.push_back(toInt(temp[0]));
+//		movieIndex.push_back(toInt(temp[1]));
+		total_ratingCount += 1;
 		global_totalRating += toInt(temp[2]);
 
 	}
-	global_averageRating =  ROUND((static_cast<double>(global_totalRating) / static_cast<double>(count)));
+
 	fin.close();
 
 	//sort by Id and emulate duplicate item
-	movieIndex = sortList(movieIndex);
-	userIndex = sortList(userIndex);
+//	movieIndex = sortList(movieIndex);
+//	userIndex = sortList(userIndex);
 
 }
 
-void loadTest(vector<string> &testData, vector<int> &movieIndex, vector<int> &userIndex)
+void loadTest(UserList &testList)
 {
 	ifstream fin;
 	fin.open(TEST_SET);
@@ -63,9 +68,14 @@ void loadTest(vector<string> &testData, vector<int> &movieIndex, vector<int> &us
 		temp.push_back(data_char);
 		temp = split(temp[0]);
 
-		testData.push_back(data_char);
-		userIndex.push_back(toInt(temp[0]));
-		movieIndex.push_back(toInt(temp[1]));
+		User user;
+		user.id = toInt(temp[0]);
+		user.movieID = toInt(temp[1]);
+		user.rating = toInt(temp[2]);
+		user.time = toInt(temp[3]);
+
+		testList.push_back(user);
+
 	}
 
 	fin.close();

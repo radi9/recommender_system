@@ -2,11 +2,12 @@
 #define COMMON_CPP_
 
 
-vector<string> split(const string &n,const char delimis[])
+vector<string> split(const string &n)
 {
 	vector<string> temp;
 	char *token = (char*)n.c_str();
 	char *pt = NULL;
+	char delimis[] = "::";
 	pt = strtok(token, delimis);
 	//get split first time and return a pointer, pt catch it
 
@@ -70,6 +71,8 @@ double getMean(int totalRating, int ratingCount)
 
 double predictRating(int userTotalRating, int userRatingCount, double bi, double bu)
 {
+	//the user i, predict the rating of item j
+
 	//baseline predict rating r^ui = u +bi +bu
 	//add bias, bi is item bias, bu is user bias
 
@@ -89,17 +92,24 @@ double predictRating(int userTotalRating, int userRatingCount, double bi, double
 	return predict_rate;
 }
 
-double rmseProcess(vector<int> &ratingVector,double predictRating)
+double rmseProcess(UserList &userList,double predictRating)
 {
+	//lack item element
 	double err;
     double rmse = 0.0;
-    int ratingVecLength = ratingVector.size();
+    int listLen = userList.max_size();
 
-	for(int i = 0; i < ratingVecLength; ++i) {
-		err = static_cast<double>(ratingVector[i]) - predictRating;
-        rmse += err*err;
+    for (int i = 0; i < listLen; i++)
+    {
+    	for(vector<User>::iterator it = userList.begin(); it != userList.end(); it++)
+    	{
+
+    		err = static_cast<double>((*it).rating) - predictRating;
+    		rmse += err*err;
+    	}
     }
-	rmse = sqrt(rmse / ratingVecLength);
+
+	rmse = sqrt(rmse / listLen);
     return rmse;
 }
 

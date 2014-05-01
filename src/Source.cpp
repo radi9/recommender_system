@@ -1,17 +1,23 @@
 #include "commonHeader.h"
 #include "common.cpp"
 #include "filepro.cpp"
-#include "model.cpp"
 
 int main()
 {
 	Index trainUser;
-	Index trainTest;
-	Data temp;
-	Data train;
-	UserList trainMatrix;
+	Index trainMovie;
+	UserList trainList; //user list in training data,same user id in same list
+	UserTable trainMatrix;//each row contents a user list, it's a table(matrix)
 
-	//end preprcessing
+	Data train;
+	Data test;
+
+	Index testUser;
+	Index testMovie;
+	UserList testList;
+	UserTable testMatrix;
+
+	//end pre-processing
 	//create model
 	int userTotalRating[SIZE_USER] = {0}; //particular user total rating
 	int userRatingCount[SIZE_USER] = {0}; //particular user rating counts
@@ -20,25 +26,15 @@ int main()
 	int movieRatingCount[SIZE_MOVIE] = {0}; //how many the movie
 
 	double global_averageRating = 0.0;
+	int global_totalRating = 0.0;
+	int total_ratingCount = 0;
 
-	void loadTrain(UserList &trainMatrix, Index &userIndex, Index &movieIndex, double &global_averageRating);
-	void loadTest(UserList &testMatrix, Index &movieIndex, Index &userIndex);
+	loadTrain(trainMatrix, global_totalRating, total_ratingCount, userTotalRating, userRatingCount
+			, movieTotalRating, movieRatingCount);
+	loadTest(testList);
 
-	for(vector<string>::iterator it = train.begin(); it != train.end(); it++)
-	{
-		vector<string> temp = split(*it);
-		User user;
-		user.id = toInt(temp[0]);
-		user.movieID = toInt(temp[1]);
-		user.rating = toInt(temp[2]);
-		user.time = toInt(temp[3]);
-
-		//sotre and add each encounter the movie's rating
-		userTotalRating[user.id] += toInt(temp[2]);
-		userRatingCount[user.id] += 1;
-		movieTotalRating[user.movieID] += toInt(temp[2]);
-		movieRatingCount[user.movieID] += 1;
-	}
+	global_averageRating =  ROUND((static_cast<double>(global_totalRating)
+			/ static_cast<double>(total_ratingCount)));
 
 
 	//initial moive(bi) and user(bu) bias
@@ -62,7 +58,7 @@ int main()
 	//start modeling
 	double learnRate = 0.005;
 	double lambda = 0.02;
-	double pui = 0.0; //predict value user u to movie i
+	double pui = 0.0; //predict rating of user u to movie i
 
 	double currentRmse = 0.0;
 	double prevRmse = 10000000;
@@ -75,7 +71,7 @@ int main()
 
 	for(int i = 0; i < 460; i++)
 	{
-		rmseProcess(testMatrix[i],predictRating(userTotalRating[i],userRatingCount[i],bi[i],bu[i]));
+		rmseProcess(testList, predictRating(userTotalRating[i], userRatingCount[i],bi[i],bu[i]));
 	}
 
 	for(int step = 0; step < 50; ++step)
@@ -88,15 +84,19 @@ int main()
 			if(userRatingCount[i] != 0)
 			{
 				sqrtNub = (1.0) / sqrt(userRatingCount[i]);
+				cout << sqrtNub << endl;
 			}
 			for(int j = 0; j <userRatingCount[i]; j++)
 			{
-				int movieID = movieIndex[j]; //this movieID
-				int rating = dataMatrix[i][j]; //this user rate this movie, the rating
+				int movieID = trainUser[j]; //this movieID
+				int rating = trainMatrix[i][j].rating; //this user rate this movie, the rating
 				double bui = global_totalRating - bu[i] - bi[j];
 				pui = predictRating(userTotalRating[i], userRatingCount[i],bi[j],bu[i]);
-				result << userIndex[i] << "::" << movieIndex[j] << "::" << dataMatrix[i][j] << "::" << timeMatrix[i][j] << "::"<< pui << endl;
-				double eui = rating - pui; //error about current rating and predicet rating
+				//original column
+				result << trainMatrix[i][j].id << "::" << trainMatrix[i][j].movieID << "::" << trainMatrix[i][j].rating <<
+						"::" << trainMatrix[i][j].time << "::"<< pui << endl;
+
+				double eui = rating - pui; //error about current rating and predict rating
 				rmse += eui * eui;
 				bu[i] += learnRate * (eui - lambda * bu[j]);
 				bi[j] += learnRate * (eui - lambda * bi[j]);
@@ -113,13 +113,20 @@ int main()
 		}
 		for(int i = 0; i < 460; i++)
 		{
-		rmseProcess(testMatrix[i],predictRating(userTotalRating[i],userRatingCount[i],bi[i],bu[i]));
+			rmseProcess(testList,predictRating(userTotalRating[i],userRatingCount[i],bi[i],bu[i]));
 		}
 	}
 	for(int i = 0; i < 460; i++)
 	{
-		rmseProcess(testMatrix[i],predictRating(userTotalRating[i],userRatingCount[i],bi[i],bu[i]));
+		rmseProcess(testList,predictRating(userTotalRating[i],userRatingCount[i],bi[i],bu[i]));
 	}
+
+//	for(auto it = testList.begin(); it != testList.end(); it++)
+//	{
+//		//all of iterators for predict fully records in test set
+//		predictRating(userTotalRating[i], userRatingCount[i], bi[i], bj[i]);
+//		resutl << "write the output" <<;
+//	}
 
 
 	system("pause");
