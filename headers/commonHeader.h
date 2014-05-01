@@ -19,9 +19,9 @@ int mybinary_search(vector<myType> &vec, unsigned start, unsigned end, const int
 
 #define SIZE_USER 943
 #define SIZE_MOVIE 1682
-#define TRAIN_SET "/home/red/ML_DM data/new ml-10M/train.txt"
-#define TEST_SET "/home/red/ML_DM data/new ml-10M/testt.txt"
-#define OUTPUT_FILE "/home/red/ML_DM data/new ml-10M"
+#define TRAIN_SET "/home/red/ML_DM data/ml-10M/new ml-10M/train.txt"
+#define TEST_SET "/home/red/ML_DM data/ml-10M/new ml-10M/testt.txt"
+#define OUTPUT_FILE "/home/red/ML_DM data/ml-10M/new ml-10M"
 #define ROUND(x) ((int)(x * 100 + 0.5)/100.) //round off to the 2nd decimal place
 #define SIZE_USER 943
 #define SIZE_MOVIE 1682

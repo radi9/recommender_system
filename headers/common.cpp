@@ -2,11 +2,12 @@
 #define COMMON_CPP_
 
 
-vector<string> split(const string &n,const char delimis[])
+vector<string> split(const string &n)
 {
 	vector<string> temp;
 	char *token = (char*)n.c_str();
 	char *pt = NULL;
+	char delimis[] = "::";
 	pt = strtok(token, delimis);
 	//get split first time and return a pointer, pt catch it
 
@@ -70,6 +71,8 @@ double getMean(int totalRating, int ratingCount)
 
 double predictRating(int userTotalRating, int userRatingCount, double bi, double bu)
 {
+	//the user i, predict the rating of item j
+
 	//baseline predict rating r^ui = u +bi +bu
 	//add bias, bi is item bias, bu is user bias
 

@@ -1,7 +1,6 @@
 #include "../headers/commonHeader.h"
 #include "../headers/common.cpp"
 #include "../headers/filepro.cpp"
-#include "../headers/model.cpp"
 
 int main()
 {
@@ -59,7 +58,7 @@ int main()
 	//start modeling
 	double learnRate = 0.005;
 	double lambda = 0.02;
-	double pui = 0.0; //predict value user u to movie i
+	double pui = 0.0; //predict rating of user u to movie i
 
 	double currentRmse = 0.0;
 	double prevRmse = 10000000;
@@ -85,6 +84,7 @@ int main()
 			if(userRatingCount[i] != 0)
 			{
 				sqrtNub = (1.0) / sqrt(userRatingCount[i]);
+				cout << sqrtNub << endl;
 			}
 			for(int j = 0; j <userRatingCount[i]; j++)
 			{
@@ -93,9 +93,10 @@ int main()
 				double bui = global_totalRating - bu[i] - bi[j];
 				pui = predictRating(userTotalRating[i], userRatingCount[i],bi[j],bu[i]);
 				//original column
-				/*result << userIndex[i] << "::" << movieIndex[j] << "::" << dataMatrix[i][j] << "::" << timeMatrix[i][j] << "::"<< pui << endl;*/
+				result << trainMatrix[i][j].id << "::" << trainMatrix[i][j].movieID << "::" << trainMatrix[i][j].rating <<
+						"::" << trainMatrix[i][j].time << "::"<< pui << endl;
 
-				double eui = rating - pui; //error about current rating and predicet rating
+				double eui = rating - pui; //error about current rating and predict rating
 				rmse += eui * eui;
 				bu[i] += learnRate * (eui - lambda * bu[j]);
 				bi[j] += learnRate * (eui - lambda * bi[j]);
@@ -112,13 +113,20 @@ int main()
 		}
 		for(int i = 0; i < 460; i++)
 		{
-		rmseProcess(testList,predictRating(userTotalRating[i],userRatingCount[i],bi[i],bu[i]));
+			rmseProcess(testList,predictRating(userTotalRating[i],userRatingCount[i],bi[i],bu[i]));
 		}
 	}
 	for(int i = 0; i < 460; i++)
 	{
 		rmseProcess(testList,predictRating(userTotalRating[i],userRatingCount[i],bi[i],bu[i]));
 	}
+
+//	for(auto it = testList.begin(); it != testList.end(); it++)
+//	{
+//		//all of iterators for predict fully records in test set
+//		predictRating(userTotalRating[i], userRatingCount[i], bi[i], bj[i]);
+//		resutl << "write the output" <<;
+//	}
 
 
 	system("pause");
