@@ -1,7 +1,13 @@
 #include "commonHeader.h"
+<<<<<<< HEAD:src/main.cpp
+=======
+#include "common.cpp"
+#include "filepro.cpp"
+>>>>>>> 3a204d8d27760c70516994a4914d689e2e9be511:src/Source.cpp
 
 vector<string> split(const string& n)
 {
+<<<<<<< HEAD:src/main.cpp
 	char* char_line = (char*)n.c_str(); // string to char, const necessary
 
 	char* token		= NULL;
@@ -9,9 +15,29 @@ vector<string> split(const string& n)
 	char  delims[]	= "::";//delimister array
 	
 	vector<string> temp;
+=======
+	Index trainUser;
+	Index trainMovie;
+	UserList trainList; //user list in training data,same user id in same list
+	UserTable trainMatrix;//each row contents a user list, it's a table(matrix)
+
+	Data train;
+	Data test;
+
+	Index testUser;
+	Index testMovie;
+	UserList testList;
+	UserTable testMatrix;
+
+	//end pre-processing
+	//create model
+	int userTotalRating[SIZE_USER] = {0}; //particular user total rating
+	int userRatingCount[SIZE_USER] = {0}; //particular user rating counts
+>>>>>>> 3a204d8d27760c70516994a4914d689e2e9be511:src/Source.cpp
 
 	token = strtok_s(char_line, delims, &context);//split by delims, and return pointer relate to first token
 
+<<<<<<< HEAD:src/main.cpp
 	while (token != NULL)
 	{	
 		temp.push_back(token);
@@ -259,6 +285,16 @@ int main()
 
 	message_box("finished loading test data", key);
 
+=======
+	double global_averageRating = 0.0;
+	int global_totalRating = 0.0;
+	int total_ratingCount = 0;
+
+	loadTrain(trainMatrix, global_totalRating, total_ratingCount, userTotalRating, userRatingCount
+			, movieTotalRating, movieRatingCount);
+	loadTest(testList);
+
+>>>>>>> 3a204d8d27760c70516994a4914d689e2e9be511:src/Source.cpp
 	global_averageRating =  ROUND((static_cast<double>(global_totalRating)
 			/ static_cast<double>(total_ratingCount)));
 
@@ -317,6 +353,7 @@ int main()
 	ofstream result;
 	result.open (OUTPUT_FILE);
 
+<<<<<<< HEAD:src/main.cpp
 	
 	message_box("necessary parameter initial finished, beggining modelling", key);
 	system("pause");
@@ -326,6 +363,12 @@ int main()
 //		rmseProcess(testList, predictRating(userTotalRating[i], userRatingCount[i],bi[i],bu[i]));
 //	}
 	
+=======
+	for(int i = 0; i < 460; i++)
+	{
+		rmseProcess(testList, predictRating(userTotalRating[i], userRatingCount[i],bi[i],bu[i]));
+	}
+>>>>>>> 3a204d8d27760c70516994a4914d689e2e9be511:src/Source.cpp
 
 	for(int step = 0; step < 50; ++step)
 	{
@@ -337,6 +380,7 @@ int main()
 			if(userRatingCount[i] != 0)
 			{
 				sqrtNub = (1.0) / sqrt(userRatingCount[i]);
+<<<<<<< HEAD:src/main.cpp
 				//cout << sqrtNub << endl;
 			}
 			for(int j = 0; j <userRatingCount[i]; j++)
@@ -352,6 +396,21 @@ int main()
 
 				double eui = rating - pui; //error about current rating and predict rating
 				//cout << eui << endl;
+=======
+				cout << sqrtNub << endl;
+			}
+			for(int j = 0; j <userRatingCount[i]; j++)
+			{
+				int movieID = trainUser[j]; //this movieID
+				int rating = trainMatrix[i][j].rating; //this user rate this movie, the rating
+				double bui = global_totalRating - bu[i] - bi[j];
+				pui = predictRating(userTotalRating[i], userRatingCount[i],bi[j],bu[i]);
+				//original column
+				result << trainMatrix[i][j].id << "::" << trainMatrix[i][j].movieID << "::" << trainMatrix[i][j].rating <<
+						"::" << trainMatrix[i][j].time << "::"<< pui << endl;
+
+				double eui = rating - pui; //error about current rating and predict rating
+>>>>>>> 3a204d8d27760c70516994a4914d689e2e9be511:src/Source.cpp
 				rmse += eui * eui;
 				bu[i] += learnRate * (eui - lambda * bu[j]);
 				bi[j] += learnRate * (eui - lambda * bi[j]);
@@ -395,15 +454,33 @@ int main()
 	{
 		for(int i = 0; i < 50; i++)
 		{
+<<<<<<< HEAD:src/main.cpp
 			cout << userBase[k][i]*movieBase[k][i] << endl;
+=======
+			rmseProcess(testList,predictRating(userTotalRating[i],userRatingCount[i],bi[i],bu[i]));
+>>>>>>> 3a204d8d27760c70516994a4914d689e2e9be511:src/Source.cpp
 		}
 	}//all 0 !!!!!! not anymore, since I use the two dimesional vector~~
 
 	for(auto it = testList.begin(); it != testList.end(); it++)
 	{
+<<<<<<< HEAD:src/main.cpp
 		//predict here
 	}
 
+=======
+		rmseProcess(testList,predictRating(userTotalRating[i],userRatingCount[i],bi[i],bu[i]));
+	}
+
+//	for(auto it = testList.begin(); it != testList.end(); it++)
+//	{
+//		//all of iterators for predict fully records in test set
+//		predictRating(userTotalRating[i], userRatingCount[i], bi[i], bj[i]);
+//		resutl << "write the output" <<;
+//	}
+
+
+>>>>>>> 3a204d8d27760c70516994a4914d689e2e9be511:src/Source.cpp
 	system("pause");
 
 
