@@ -19,27 +19,22 @@ int mybinary_search(vector<myType> &vec, unsigned start, unsigned end, const int
 
 #define SIZE_USER 943
 #define SIZE_MOVIE 1682
-<<<<<<< HEAD
 #define TRAIN_SET "C:/Users/red/Documents/optimization data/train.txt"
 #define TEST_SET "C:/Users/red/Documents/optimization data/test.txt"
 #define OUTPUT_FILE "C:/Users/red/Documents/optimization data/output.txt"
-=======
-#define TRAIN_SET "C:\Users\User\Documents\optimization data\train.txt"
-#define TEST_SET "C:\Users\User\Documents\optimization data\testt.txt"
-#define OUTPUT_FILE "C:\Users\User\Documents\optimization data\new ml-10M.txt"
->>>>>>> 3a204d8d27760c70516994a4914d689e2e9be511
 #define ROUND(x) ((int)(x * 100 + 0.5)/100.) //round off to the 2nd decimal place
 #define SIZE_USER 943
 #define SIZE_MOVIE 1682
 #define BEGIN_BLOCK {
 #define END_BLOCK }
 
-struct User{
-
+struct User
+{
 	int id;
 	int movieID;
 	int rating;
 	int time;
+	double predict_rating;
 	bool operator()(const User &a)
 	{
 		return (this -> movieID > a.id) ? 1 : 0;
@@ -52,7 +47,7 @@ typedef vector<User> UserList;
 typedef vector<UserList> UserTable;
 
 
-
+void message_box(string message, bool key);
 
 void loadTrain(UserTable &trainMatrix,int &global_totalRating, int &total_ratingCount,
 		int *userTotalRating, int *userRatingCount, int *movieTotalRating, int *movieRatingCount);
