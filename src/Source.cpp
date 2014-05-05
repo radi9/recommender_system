@@ -393,15 +393,17 @@ int main()
 	system("psause");
 	message_box("multiple userBase and movieBase", key);
 
-	for(int k = 0; k < 50; k++)
-	{
-		for(int i = 0; i < 50; i++)
-		{
-			cout << userBase[k][i]*movieBase[k][i] << endl;
-		}
-	}//all 0 !!!!!! not anymore, since I use the two dimesional vector~~
+	//for(int k = 0; k < 50; k++)
+	//{
+	//	for(int i = 0; i < 50; i++)
+	//	{
+	//		cout << userBase[k][i]*movieBase[k][i] << endl;
+	//	}
+	//}
 
 	
+
+
 	UserList predict_users;
 
 	for(auto it = testList.begin(); it != testList.end(); it++)
@@ -410,29 +412,26 @@ int main()
 						, movieBase[(*it).movieID], bi[(*it).movieID], bu[(*it).id], 50);
 
 		result << (*it).id << "::" << (*it).movieID << "::" << (*it).rating << "::" << (*it).time << "::" << (*it).predict_rating << endl;
-		//for(auto movieID = 1; movieID <= SIZE_MOVIE; movieID++)
-		//{
-		//	User user;
-		//	user.id = (*it).id;
-		//	user.predict_rating = predictRating(userTotalRating[user.id], userRatingCount[user.id], userBase[user.id]
-		//				, movieBase[movieID], bi[movieID], bu[user.id], 50);
-		//	if( (*it).movieID != movieID)
-		//	{
-		//		user.movieID = movieID;
-		//		user.time = 0;
-		//		user.rating = 0;
-		//		result << user.id << "::" << user.movieID << "::" << user.rating << "::" << user.time << "::" << user.predict_rating;
-		//	}
-		//	else
-		//	{
-		//		user.movieID = (*it).movieID;
-		//		user.time = (*it).time;
-		//		user.rating = (*it).rating;
-		//		result << user.id << "::" << user.movieID << "::" << user.rating << "::" << user.time << "::" << user.predict_rating;
-		//	}
-		//}
 	}
-	
+
+
+	message_box("final measure precedure", key); 
+
+	double measure_score = {0.0};
+	int itemCount = 0;
+
+	for(auto it = testList.begin(); it != testList.end(); it++)
+	{
+		(*it).predict_rating = predictRating(userTotalRating[(*it).id], userRatingCount[(*it).id], userBase[(*it).id]
+						, movieBase[(*it).movieID], bi[(*it).movieID], bu[(*it).id], 50);
+
+		measure_score += ((*it).predict_rating - (*it).rating);
+		itemCount ++;
+	}
+
+	measure_score = sqrt(measure_score/itemCount);
+
+	cout << "final measure MSE score is : " << measure_score << endl;
 
 	system("pause");
 	return 0;
